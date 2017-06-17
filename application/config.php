@@ -156,8 +156,8 @@ return [
             'appsecret'=>'KEYm9MmrMJo5m1m9017',
         ],
         'weixin'=>[
-            'appid'=>'wxc6fe38931e7e23ab',
-            'appsecret'=>'d5733c201ad190183bbd132ad3107551',
+            'appid'=>'wxdc35ddff794237af',
+            'appsecret'=>'a1ec2d4513d43c44f518fefa3007a193',
         ]
     ],
     // 默认跳转页面对应的模板文件
