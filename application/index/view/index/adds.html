@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="_CSS_/bootstrap.min.css">
+    <style>
+        form .input-group{
+            margin-top: 7px;
+        }
+        .a-upload {
+            text-decoration: none;
+            padding: 4px 10px;
+            height: 25px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            color: #888;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            margin: 0 10px;
+        }
+
+        .a-upload{
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer
+        }
+        .a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
+        }
+    </style>
+    <script src="_JS_/jquery.js"></script>
+
+</head>
+<body>
+<div>
+    <div style="height: 50px;font-size: 30px;text-align: center">添加文章表单</div>
+
+    <form action="{:url('yz_add')}" method="post" enctype="multipart/form-data" class="form">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">文章标题</span>
+            <input type="text" class="form-control" name="title" placeholder="请输入文章标题" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2">文章作者</span>
+            <input type="text" class="form-control" name="auth" placeholder="请输入文章作者" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon3">文章图片</span>
+            <input type="file" class="file_input" name="img"/>
+        </div>
+
+        <span>文章描述</span>
+        <script id="container" name="description" type="text/plain"></script>
+        <br>
+        <button type="submit" class="btn btn-success">提交</button>
+    </form>
+</div>
+</body>
+<script src="_JS_/jquery.js"></script>
+<script type="text/javascript" src="_UEDITOR_/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="_UEDITOR_/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>
+</html>

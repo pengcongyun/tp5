@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询详情</title>
+</head>
+<body>
+    <div>
+        <div style="text-align:center">{$data.title}</div>
+        <span style="font-size: 10px;color:red;margin: 0 5px;">发布时间：{:date('Y-m-d H:i:s',$data.create_time)}</span>
+        <span style="font-size: 10px;color:green;margin: 0 10px;">作者：{$data.auth?$data.auth:'默认作者jack'}</span>
+        <p style="text-indent: 2em">
+            {$data.description}
+        </p>
+    </div>
+</body>
+</html>

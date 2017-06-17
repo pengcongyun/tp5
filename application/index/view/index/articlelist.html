@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body a{
+            text-decoration: none;
+        }
+        body li{
+            list-style-type:none;
+            float: left;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+{volist name="data" id="vo"}
+<div style="margin-top: 10px;height: 80px;">
+    <span>
+        <!--<a href="{:url('index/detail','id='.$vo.id)}" style="text-decoration: none;color: black">{$key}.{$vo.title}</a>-->
+        <a href="{:url('index/detail',['id'=>$vo.id])}" style="text-decoration: none;color: black">{$vo.id}.{$vo.title}</a>
+    </span>
+    <p style="font-size: 14px;color: #3c763d;text-indent:2em;">
+        {$vo.description}
+    </p>
+</div>
+{/volist}
+{$data->render()}
+<br>
+<div style="height: 100px">
+    <p>
+        欢迎来到tp5
+    </p>
+</div>
+</body>
+</html>

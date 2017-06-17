@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{:url('up')}">添加</a>
+    <table>
+        <tr>
+            <th>图片ID</th>
+            <th>图片</th>
+            <th>操作</th>
+        </tr>
+        {volist name="data" id="row"}
+        <tr>
+            <td>{$row.id}</td>
+            <td>
+                {if condition="$row['pic'] neq null"}
+                    {volist name="row.pic" id="row"}
+                        <img src="{$row}" alt="" >
+                    {/volist}
+                {else /}
+                    xxx
+                {/if}
+            </td>
+            <td>
+                <a href="">删除</a>
+                <a href="">修改</a>
+            </td>
+        </tr>
+        {/volist}
+    </table>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax上传图片</title>
+    <!--<link rel="stylesheet" href="_CSS_/bootstrap.min.css">-->
+    <style>
+        .a-upload {
+            text-decoration: none;
+            padding: 4px 10px;
+            height: 20px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            color: #888;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1
+        }
+
+        .a-upload  input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer
+        }
+
+        /*.a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
+        }*/
+    </style>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <label>请选择一个图像文件：</label>
+            <a href="javascript:;" class="a-upload">
+                <input type="file" id="file_input" name="pic"  class="btn"/>上传图片
+            </a>
+        </div>
+        <div class="upload-img-box"></div>
+
+        <input type="submit">
+    </form>
+</body>
+<script src="_JS_/jquery.js"></script>
+<script src="_LAYER_/layer.js"></script>
+<script>
+    window.onload = function() {
+        var input = document.getElementById("file_input");
+        var result, div;
+        if (typeof FileReader === 'undefined') {
+            result.innerHTML = "抱歉，你的浏览器不支持 FileReader";
+            input.setAttribute('disabled', 'disabled');
+        } else {
+            input.addEventListener('change', readFile, false);
+        }
+        function readFile(){
+            var fd = new FormData();
+            for(var i=0;i<this.files.length;i++){
+                var reader = new FileReader();
+                reader.readAsDataURL(this.files[i]);
+                fd.append(i,this.files[i]);
+                $.ajax({
+                    processData: false,
+                    contentType: false,
+                    url : '{:url("upload/upload")}',
+                    type : 'post',
+                    data : fd,
+                    success : function(data){
+                        console.log(data);return false;
+                        var upload_img_box = $('.upload-img-box');
+                        var html = '';
+                        html += '<div class="upload-pre-item" style="display: inline-block;width: 104px;margin-right: 10px;margin-bottom: 10px">';
+                        html += '<table><tr><td>';
+                        html += '<input type="hidden" name="paths[]" value="'+data.url+'" />';
+                        html += '<img src="'+data.url+'" width="100" height="100"/>';
+                        html += '</td></tr><tr><td>';
+                        html += '<div id="div"><span style="color: red;font-weight: bold" class="del_img" id="">X</span></div>';
+                        html += '</td></tr></table>';
+                        html +='</div>';
+                        $(html).appendTo(upload_img_box);
+                    }
+                })
+            }
+        }
+        //事件绑定，当点击X的时候就将div整个移除
+        $('.upload-img-box').on('click','.del_img', function(){
+            var pic=$(this).parent('div').parent().parent().parent().find('img')[0].src;
+            var node = $(this);
+            var path_id = node.attr('data');
+            var flag = true;//是否要删除
+            //回显删除
+            if(path_id){
+                var url = '{:url("upload/delete")}';
+                var data = {id:path_id};
+                $.getJSON(url,data,function(response) {
+                    if(response.status){
+                        node.parents('table').parent('div').remove();
+                    }
+                });
+            }else{
+                //上传不如意删除
+                var url = '{:url("upload/delete")}';
+                var data={pic:pic};
+                $.getJSON(url,data,function(response) {
+                    if(response.status==2){
+                        node.parents('table').parent('div').remove();
+                        layer.alert(response.msg);
+                    }else{
+                        layer.alert(response.msg);
+                    }
+                });
+            }
+        })
+    }
+</script>
+</html>
