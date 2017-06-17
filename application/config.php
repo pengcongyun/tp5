@@ -150,6 +150,16 @@ return [
         '_LAYER_'=>'/static/layer',
     ],
 
+    'thirdlogin'	=>[
+        'qq' => [
+            'appid'=> 'ID1105962025',
+            'appsecret'=>'KEYm9MmrMJo5m1m9017',
+        ],
+        'weixin'=>[
+            'appid'=>'wxc6fe38931e7e23ab',
+            'appsecret'=>'d5733c201ad190183bbd132ad3107551',
+        ]
+    ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
     'dispatch_error_tmpl'    => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
