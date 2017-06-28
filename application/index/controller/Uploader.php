@@ -89,5 +89,17 @@ class Uploader extends Controller
         }
         return view('piclist',['data'=>$data]);
     }
-    //
+    //删除
+    public function delete($id){
+        $row=db('apic')->find($id);
+        if(empty($row)){
+            $this->error('数据出错了');exit;
+        }
+        $r=db('apic')->delete($id);
+        if($r){
+            $this->success('删除成功');exit;
+        }else{
+            $this->error('删除失败');exit;
+        }
+    }
 }

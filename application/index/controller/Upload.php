@@ -14,6 +14,7 @@ use think\Image;
 
 class Upload extends Controller
 {
+    //生成缩略图
     public function upload(){
         $pic1 =  '\upload\thumb\\'. time().'.jpg'; //数据库存的路径
         $pic =  ROOT_PATH.'public'.$pic1; //生成略缩图需要的绝对路径
@@ -43,5 +44,17 @@ class Upload extends Controller
             ];
         }
         return json($data);
+    }
+    //生成缩略图
+    public function upload1(){
+        $file=request()->file('pic1');
+        //保存到根目录
+        $info=$file->validate(['size'=>15678,'ext'=>'jpg,png,gif,jpeg'])->move(ROOT_PATH . 'public\\'.'upload');
+        if($info){
+            $pic='\\'.'upload\\'.$info->getSaveName();
+        }else{
+            $pic=$info->getError();
+        }
+        return json($pic);
     }
 }

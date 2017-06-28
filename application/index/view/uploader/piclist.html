@@ -17,15 +17,15 @@
             <td>{$row.id}</td>
             <td>
                 {if condition="$row['pic'] neq null"}
-                    {volist name="row.pic" id="row"}
-                        <img src="{$row}" alt="" >
+                    {volist name="row.pic" id="row1"}
+                        <img src="{$row1}" alt="" >
                     {/volist}
                 {else /}
                     xxx
                 {/if}
             </td>
             <td>
-                <a href="">删除</a>
+                <a href="{:url('delete',['id'=>$row.id])}">删除</a>
                 <a href="">修改</a>
             </td>
         </tr>
